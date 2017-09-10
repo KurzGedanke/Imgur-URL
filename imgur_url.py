@@ -58,7 +58,7 @@ class ImgurURL:
         return finishedurl
 
     def get_gallery_urls(self, starturl):
-        pass
+        raise Exception('Gallery links are not supported yes!')
 
     def get_single_image_url(self, starturl):
         finishedurl = []
