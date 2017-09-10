@@ -6,6 +6,23 @@ class ImgurURL:
     def __init__(self):
         self = self
 
+    def get_imgur_urls(self, starturl):
+        '''
+        Scans which kind of imgur url the link is and used the correct function for returning it.
+        '''
+        albumRegEx = r"imgur.com\/a\/([\w\d]*)"
+        galleryRegEx = r''
+        singleImageRegEx = r''
+
+        if re.search(albumRegEx, starturl):
+            return self.get_album_urls(starturl)
+        elif re.search(galleryRegEx, starturl):
+            return self.get_gallery_urls()
+        elif re.search(singleImageRegEx, starturl):
+            return self.get_single_image_url()
+        else:
+            return 'No correct Imgur URL'
+
     def get_blog_layout(self, starturl):
         '''
         Uses regualar expression to convert the input url to an /layout/blog url
@@ -20,12 +37,11 @@ class ImgurURL:
             print('There was an error with link.')
             exit()
 
-    def get_imgur_urls(self, starturl):
+    def get_album_urls(self, starturl):
         '''
         Uses regular expression to get the hashes and the format out of the json in the html
         and converts them into a working imgur url. Returns a arrays.
         '''
-
         finishedurl = []
         regex = r"\{\"hash\":\"([\w\d]*)\"\,\"title\".*?\"ext\"\:\"(\.jpg|.png|.gif|.gifv|.mp4)\".*?\}"
         try:
