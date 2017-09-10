@@ -13,22 +13,22 @@ class ImgurURL:
         function for returning it.
         '''
         albumRegEx = r"imgur.com\/a\/([\w\d]*)"
-        galleryRegEx = r''
-        singleImageRegEx = r''
+        galleryRegEx = r"imgur.com\/gallery\/([\w\d]*)"
+        singleImageRegEx = r"imgur.com\/([\w\d]{7})"
 
         if re.search(albumRegEx, starturl):
             return self.get_album_urls(starturl)
         elif re.search(galleryRegEx, starturl):
-            return self.get_gallery_urls()
+            return self.get_gallery_urls(starturl)
         elif re.search(singleImageRegEx, starturl):
-            return self.get_single_image_url()
+            return self.get_single_image_url(starturl)
         else:
-            return 'No correct Imgur URL'
+            raise ValueError('Not an valid imgur link!')
 
     def get_blog_layout(self, starturl):
         '''
         Uses regualar expression to convert the input url to an /layout/blog
-        url where all the hashes are within the html. Returns a stringt with
+        url where all the hashes are within the html. Returns a string with
         url.
         '''
 
@@ -37,8 +37,7 @@ class ImgurURL:
         try:
             return 'https://imgur.com/a/{0}/layout/blog'.format(urlhash.group(1))
         except:
-            print('There was an error with link.')
-            exit()
+            raise Exception('Album Link couldn\'t get converted')
 
     def get_album_urls(self, starturl):
         '''
@@ -51,12 +50,26 @@ class ImgurURL:
         try:
             imgurHTML = requests.get(self.get_blog_layout(starturl))
         except:
-            print('Something failed with the download.')
-            exit()
+            raise Exception('Something failed with the download')
         imgurhashes = re.findall(regex, imgurHTML.text)
 
         for hashes in imgurhashes:
             finishedurl.append('https://i.imgur.com/{0}{1}'.format(hashes[0], hashes[1]))
+        return finishedurl
+
+    def get_gallery_urls(self, starturl):
+        pass
+
+    def get_single_image_url(self, starturl):
+        finishedurl = []
+        regex = r"href\=\"https://i\.imgur\.com\/([\d\w]*)(\.jpg|\.png|\.gif|\.mp4|\.gifv)"
+        try:
+            imgurHTML = requests.get(starturl)
+        except:
+            raise Exception('Something failed with the download')
+
+        imgurhash = re.findall(regex, imgurHTML.text)
+        finishedurl.append('https://i.imgur.com/{0}{1}'.format(imgurhash[0][0], imgurhash[0][1]))
         return finishedurl
 
 
@@ -71,3 +84,13 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+'''
+Test URLS:
+Album: https://imgur.com/a/fOvF2
+
+SingleImage: https://imgur.com/URyijAU
+
+Gallery: https://imgur.com/gallery/sQJ2h
+'''
