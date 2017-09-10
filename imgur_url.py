@@ -1,6 +1,7 @@
 import re
 import requests
 
+
 class ImgurURL:
 
     def __init__(self):
@@ -8,7 +9,8 @@ class ImgurURL:
 
     def get_imgur_urls(self, starturl):
         '''
-        Scans which kind of imgur url the link is and used the correct function for returning it.
+        Scans which kind of imgur url the link is and used the correct
+        function for returning it.
         '''
         albumRegEx = r"imgur.com\/a\/([\w\d]*)"
         galleryRegEx = r''
@@ -25,8 +27,9 @@ class ImgurURL:
 
     def get_blog_layout(self, starturl):
         '''
-        Uses regualar expression to convert the input url to an /layout/blog url
-        where all the hashes are within the html. Returns a stringt with url.
+        Uses regualar expression to convert the input url to an /layout/blog
+        url where all the hashes are within the html. Returns a stringt with
+        url.
         '''
 
         regex = r"imgur.com\/a\/([\w\d]*)"
@@ -39,8 +42,9 @@ class ImgurURL:
 
     def get_album_urls(self, starturl):
         '''
-        Uses regular expression to get the hashes and the format out of the json in the html
-        and converts them into a working imgur url. Returns a arrays.
+        Uses regular expression to get the hashes and the format out of the
+        json in the html and converts them into a working imgur url. Returns a
+        arrays.
         '''
         finishedurl = []
         regex = r"\{\"hash\":\"([\w\d]*)\"\,\"title\".*?\"ext\"\:\"(\.jpg|.png|.gif|.gifv|.mp4)\".*?\}"
@@ -63,6 +67,7 @@ def main():
 
     for url in urls:
         print(url)
+
 
 if __name__ == '__main__':
     main()
