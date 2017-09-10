@@ -16,12 +16,12 @@ class ImgurURL:
         galleryRegEx = r"imgur.com\/gallery\/([\w\d]*)"
         singleImageRegEx = r"imgur.com\/([\w\d]{7})"
 
-        if re.search(albumRegEx, starturl):
-            return self.get_album_urls(starturl)
-        elif re.search(galleryRegEx, starturl):
-            return self.get_gallery_urls(starturl)
-        elif re.search(singleImageRegEx, starturl):
-            return self.get_single_image_url(starturl)
+        if re.search(albumRegEx, starturl.replace(' ', '')):
+            return self.get_album_urls(starturl.replace(' ', ''))
+        elif re.search(galleryRegEx, starturl.replace(' ', '')):
+            return self.get_gallery_urls(starturl.replace(' ', ''))
+        elif re.search(singleImageRegEx, starturl.replace(' ', '')):
+            return self.get_single_image_url(starturl.replace(' ', ''))
         else:
             raise ValueError('Not an valid imgur link!')
 
