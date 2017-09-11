@@ -56,7 +56,7 @@ Download finished!
 ```
 
 Please note that you have to create the folder by yourself. 
-## How to use in your own project:
+## How to use it in your own project:
 Enter: 
 
 ```bash
