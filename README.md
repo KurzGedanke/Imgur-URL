@@ -7,18 +7,66 @@ A Python script which gives out an array of the images url of an imgur link.
 
 Album links and single image links are working! 
 
-### How to use:
+## How to use the Command Line Tool: 
+
+Donwload or clone this repository:
+
+```bash
+$ git clone https://github.com/KurzGedanke/Imgur-URL.git
+```
+Change the directory to the `Imgur-URL` dir and install the requirements.
+
+```bash
+$ cd Imgur-URL
+$ pip install -r requirements.txt
+```
+
+Run the file with the `-h` flag for help:
+
+```bash
+$ python imgur_url.py -h
+usage: imgur_url.py [-h] [-list ImgurLink] [-download ImgurLink]
+
+List or Download Imgur Links
+
+optional arguments:
+  -h, --help           show this help message and exit
+  -list ImgurLink      List all links from the Album.
+  -download ImgurLink  Downloads all images from the album.
+```
+
+With the `-list` flag it prints out the whole list of urls and with the `-download` flag its downloading all images into
+a folder of your choice. For example:
+
+```bash
+$ python imgur_url.py -download https://imgur.com/a/3aeC1
+Please enter your desired path:
+$ /Users/lucius/Desktop/ # The last backslash is important for now!
+Your Download starts:
+/Users/lucius/Desktop/ITKdVe8.png
+/Users/lucius/Desktop/TBkr4BC.png
+/Users/lucius/Desktop/vZjTwWQ.png
+/Users/lucius/Desktop/2c1NIP2.png
+/Users/lucius/Desktop/ITKdVe8.png
+/Users/lucius/Desktop/TBkr4BC.png
+/Users/lucius/Desktop/vZjTwWQ.png
+/Users/lucius/Desktop/2c1NIP2.png
+Download finished!
+```
+
+Please note that you have to create the folder by yourself. 
+## How to use in your own project:
 Enter: 
 
 ```bash
-git clone https://github.com/KurzGedanke/Imgur-URL.git
+$ git clone https://github.com/KurzGedanke/Imgur-URL.git
 ```
 
 in your Terminal and copy the `requirements.txt` and `imgur_url.py` to your project directory.
 With your virtualenv enabled or not, run following command in your terminal:
 
 ```bash
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 Now import the script in your python file. 
@@ -40,6 +88,8 @@ print(url.get_imgur_urls('imgur.com/a/$HASH'))
 
 - [x] single image links
 - [x] album links
+- [x] downloading files as Command Line Tool
+- [ ] path normalisation for downloading
 - [ ] gallery links
 - [ ] pip install
 - [ ] tests

@@ -82,25 +82,33 @@ class ImgurURL:
         return finishedurl
 
 
+def list_url(urlinput):
+    imgururls = ImgurURL()
+    urls = imgururls.get_imgur_urls(urlinput)
+
+    for url in urls:
+        print(url)
+
+
+def download(urlinput):
+    path = input('Please enter your desired path: ')
+    imgururls = ImgurURL()
+    urls = imgururls.get_imgur_urls(urlinput)
+    hashAndEndigRegEx = r"i.imgur.com\/([\w\d]*)(\.jpg|\.gif|\.png|\.mp4|\.gifv)"
+    print('Your Download starts: ')
+    for url in urls:
+        hashAndEnding = re.findall(hashAndEndigRegEx, url)
+        print('{0}{1}{2}'.format(path, hashAndEnding[0][0], hashAndEnding[0][1]))
+        with open('{0}{1}{2}'.format(path, hashAndEnding[0][0], hashAndEnding[0][1]), 'wb') as f:
+            r = requests.get(url)
+            f.write(r.content)
+    print('Download finished!')
+
 def main():
 
-    def list_url(urlinput):
-        imgururls = ImgurURL()
-        urls = imgururls.get_imgur_urls(urlinput)
-
-        for url in urls:
-            print(url)
-
-    def download(urlinput):
-        path = input('Please enter your desired path: ')
-        imgururls = ImgurURL()
-        urls = imgururls.get_imgur_urls(urlinput)
-
-
-
-    parser = argparse.ArgumentParser(description='List or Download Imgur Links')
+    parser = argparse.ArgumentParser(description='Lists or downloads Imgur links.')
     parser.add_argument('-list', metavar='ImgurLink', type=str,
-                        help='List all links from the Album.')
+                        help='Lists all links from the Album.')
     parser.add_argument('-download', metavar='ImgurLink', type=str,
                         help='Downloads all images from the album.')
 
@@ -120,7 +128,7 @@ if __name__ == '__main__':
 
 '''
 Test URLS:
-Album: https://imgur.com/a/fOvF2
+Album: https://imgur.com/a/3aeC1
 
 SingleImage: https://imgur.com/URyijAU
 
