@@ -1,4 +1,6 @@
 import re
+import os
+import argparse
 import requests
 
 
@@ -53,8 +55,13 @@ class ImgurURL:
             raise Exception('Something failed with the download')
         imgurhashes = re.findall(regex, imgurHTML.text)
 
-        for hashes in imgurhashes:
-            finishedurl.append('https://i.imgur.com/{0}{1}'.format(hashes[0], hashes[1]))
+        # fixes a bug with a single image album where it outputs the same links twice
+        if imgurhashes[0] == imgurhashes[1]:
+            finishedurl.append('https://i.imgur.com/{0}{1}'.format(imgurhashes[0][0],
+                                                                   imgurhashes[0][1]))
+        else:
+            for hashes in imgurhashes:
+                finishedurl.append('https://i.imgur.com/{0}{1}'.format(hashes[0], hashes[1]))
         return finishedurl
 
     def get_gallery_urls(self, starturl):
@@ -76,12 +83,35 @@ class ImgurURL:
 
 
 def main():
-    urlinput = input('Please enter your Imgur Album URL: \n')
-    imgururls = ImgurURL()
-    urls = imgururls.get_imgur_urls(urlinput)
 
-    for url in urls:
-        print(url)
+    def list_url(urlinput):
+        imgururls = ImgurURL()
+        urls = imgururls.get_imgur_urls(urlinput)
+
+        for url in urls:
+            print(url)
+
+    def download(urlinput):
+        path = input('Please enter your desired path: ')
+        imgururls = ImgurURL()
+        urls = imgururls.get_imgur_urls(urlinput)
+
+
+
+    parser = argparse.ArgumentParser(description='List or Download Imgur Links')
+    parser.add_argument('-list', metavar='ImgurLink', type=str,
+                        help='List all links from the Album.')
+    parser.add_argument('-download', metavar='ImgurLink', type=str,
+                        help='Downloads all images from the album.')
+
+    args = parser.parse_args()
+
+    if args.list:
+        list_url(args.list)
+    elif args.download:
+        download(args.download)
+    else:
+        raise Exception('Something went wrong.')
 
 
 if __name__ == '__main__':
