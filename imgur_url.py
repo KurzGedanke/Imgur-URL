@@ -82,6 +82,19 @@ class ImgurURL:
         return finishedurl
 
 
+def manage_file_path():
+    path = input('Please enter your desired path: ')
+    normPath = os.path.normpath(path)
+    
+    if os.path.exists(normPath):
+        print('Folder already exisit!')
+        return normPath
+    else:
+        os.mkdir(normPath)
+        print('Folder was created!')
+        return normPath
+
+
 def list_url(urlinput):
     imgururls = ImgurURL()
     urls = imgururls.get_imgur_urls(urlinput)
@@ -91,15 +104,15 @@ def list_url(urlinput):
 
 
 def download(urlinput):
-    path = input('Please enter your desired path: ')
+    path = manage_file_path()
     imgururls = ImgurURL()
     urls = imgururls.get_imgur_urls(urlinput)
     hashAndEndigRegEx = r"i.imgur.com\/([\w\d]*)(\.jpg|\.gif|\.png|\.mp4|\.gifv)"
     print('Your Download starts: ')
     for url in urls:
         hashAndEnding = re.findall(hashAndEndigRegEx, url)
-        print('{0}{1}{2}'.format(path, hashAndEnding[0][0], hashAndEnding[0][1]))
-        with open('{0}{1}{2}'.format(path, hashAndEnding[0][0], hashAndEnding[0][1]), 'wb') as f:
+        print('{0}/{1}{2}'.format(path, hashAndEnding[0][0], hashAndEnding[0][1]))
+        with open('{0}/{1}{2}'.format(path, hashAndEnding[0][0], hashAndEnding[0][1]), 'wb') as f:
             r = requests.get(url)
             f.write(r.content)
     print('Download finished!')

@@ -42,20 +42,20 @@ a folder of your choice. For example:
 ```bash
 $ python imgur_url.py -download https://imgur.com/a/3aeC1
 Please enter your desired path:
-$ /Users/lucius/Desktop/ # The last backslash is important for now!
+$ /Users/lucius/Desktop/newFolder
 Your Download starts:
-/Users/lucius/Desktop/ITKdVe8.png
-/Users/lucius/Desktop/TBkr4BC.png
-/Users/lucius/Desktop/vZjTwWQ.png
-/Users/lucius/Desktop/2c1NIP2.png
-/Users/lucius/Desktop/ITKdVe8.png
-/Users/lucius/Desktop/TBkr4BC.png
-/Users/lucius/Desktop/vZjTwWQ.png
-/Users/lucius/Desktop/2c1NIP2.png
+/Users/lucius/Desktop/newFolder/ITKdVe8.png
+/Users/lucius/Desktop/newFolder/TBkr4BC.png
+/Users/lucius/Desktop/newFolder/vZjTwWQ.png
+/Users/lucius/Desktop/newFolder/2c1NIP2.png
+/Users/lucius/Desktop/newFolder/ITKdVe8.png
+/Users/lucius/Desktop/newFolder/TBkr4BC.png
+/Users/lucius/Desktop/newFolder/vZjTwWQ.png
+/Users/lucius/Desktop/newFolder/2c1NIP2.png
 Download finished!
 ```
 
-Please note that you have to create the folder by yourself. 
+You have to enter a full path but a new folder is created for you.
 ## How to use it in your own project:
 Enter: 
 
@@ -85,12 +85,12 @@ print(url.get_imgur_urls('imgur.com/a/$HASH'))
 ```
 **`.get_imgur_urls()` returns always an array!** 
 
-### TODO:
+## TODO:
 
 - [x] single image links
 - [x] album links
 - [x] downloading files as Command Line Tool
-- [ ] path normalisation for downloading
+- [x] path normalisation for downloading
 - [ ] gallery links
 - [ ] pip install
 - [ ] tests
