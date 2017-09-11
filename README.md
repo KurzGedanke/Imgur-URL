@@ -2,7 +2,7 @@
 [![license MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/KurzGedanke/Imgur-URL/blob/master/LICENSE)
 [![Python Version 3.6](https://img.shields.io/badge/Python-3.6-blue.svg)](https://github.com/KurzGedanke/Imgur-URL)
 [![Say Thanks!](https://img.shields.io/badge/Donate%20Bitcoin-💵-lightgrey.svg)](bitcoin:1CJJrTSedk9dDQ7gkfiX3SGcLPKq6ZgZAg)
-[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/KurzGedanke)
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-🐿️-1EAEDB.svg)](https://saythanks.io/to/KurzGedanke)
 
 A Python script which gives out an array of the images url of an imgur link.
 
