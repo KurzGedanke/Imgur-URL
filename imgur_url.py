@@ -9,6 +9,7 @@ class ImgurURL:
     def __init__(self):
         self = self
 
+
     def get_imgur_urls(self, starturl):
         '''
         Scans which kind of imgur url the link is and used the correct
@@ -33,7 +34,6 @@ class ImgurURL:
         url where all the hashes are within the html. Returns a string with
         url.
         '''
-
         regex = r"imgur.com\/a\/([\w\d]*)"
         urlhash = re.search(regex, starturl)
         try:
@@ -55,7 +55,8 @@ class ImgurURL:
             raise Exception('Something failed with the download')
         imgurhashes = re.findall(regex, imgurHTML.text)
 
-        # fixes a bug with a single image album where it outputs the same links twice
+        # fixes a bug with a single image album where it outputs the same links
+        # twice
         if imgurhashes[0] == imgurhashes[1]:
             finishedurl.append('https://i.imgur.com/{0}{1}'.format(imgurhashes[0][0],
                                                                    imgurhashes[0][1]))
@@ -85,7 +86,7 @@ class ImgurURL:
 def manage_file_path():
     path = input('Please enter your desired path: ')
     normPath = os.path.normpath(path)
-    
+
     if os.path.exists(normPath):
         print('Folder already exisit!')
         return normPath
